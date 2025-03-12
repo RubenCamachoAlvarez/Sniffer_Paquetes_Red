@@ -1,0 +1,8 @@
+cffi==1.17.1
+cryptography==44.0.2
+filelock==3.17.0
+meson==1.7.0
+packaging==24.2
+pycparser==2.22
+tqdm==4.67.1
+wheel==0.45.0
