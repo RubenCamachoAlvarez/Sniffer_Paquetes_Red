@@ -73,3 +73,66 @@ class DatagramaIPv4(PDU):
         self.datos = None
 
 
+    def procesar_pdu(self, raw_octets : bytes):
+
+        """
+        
+        En esta clase, este metodo se encarga de realizar el proceso de extracción del encabezado del datagrama
+        de internet, así como los datos que conforman el payload.
+        
+        """
+
+        self.version = (raw_octets[0] & 0xF0) >> 4
+
+        self.longitud_encabezado_internet = raw_octets[0] & 0x0F
+
+        self.tipo_de_servicio = raw_octets[1] & 0xFF
+
+        self.longitud_total = int.from_bytes(raw_octets[2:4], byteorder="big")
+
+        self.identificador = int.from_bytes(raw_octets[4:6], byteorder="big")
+
+        self.flags = (raw_octets[6] & 0xE0) >> 5
+
+        self.fragment_offset = int.from_bytes(raw_octets[6:8], byteorder="big") & 0x1FFF
+
+        self.ttl = raw_octets[8] & 0xFF
+
+        self.protocolo = raw[9] & 0xFF
+
+        self.checksum_encabezado = int.from_bytes(raw_octets[10:12], byteorder="big")
+
+        self.direccion_origen = ".".join(f"{octeto:d}" for octeto in raw_octets[12:16])
+
+        self.direccion_destino = ".".join(f"{octeto:d}" for octeto in raw_sockets[16:20])
+
+        self.opciones = raw_octets[20:self.longitud_encabezado_internet*4]
+
+        self.datos = raw_octets[(self.longitud_encabezado_internet * 4):]
+
+
+    def imprimir_informacion(self):
+
+        """Método abstracto que debe de implementar cada PDU para mostrar su información asociada correctamente."""
+
+        print(f"Version: {self.version}")
+
+        print(f"Longitud del encabezado del datagrama de internet: {self.longitud_encabezado_internet} octetos")
+
+        print(f"Longitud total del datagrama de internet: {self.longitud_total} octetos")
+
+        #Puede añadirse información acerca de la fragmentación del datagrama (en caso de aplicar).
+
+        print(f"Time to Live (TTL): {self.ttl}")
+
+        print(f"Protocolo transportado: {self.protocolo}")
+
+        print(f"Checksum del encabezado: {self.checksum_encabezado}")
+
+        print(f"Direccion IP origen: {self.direccion_origen}")
+
+        print(f"Direccion IP destino: {self.direccion_destino}")
+
+
+
+
