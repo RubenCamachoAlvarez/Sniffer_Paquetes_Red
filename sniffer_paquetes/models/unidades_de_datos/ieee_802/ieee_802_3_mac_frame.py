@@ -55,21 +55,21 @@ class TramaMacEthernet:
 
 
 
-        def _procesar_octetos_trama_mac(raw_octets : bytes):
+    def _procesar_octetos_trama_mac(self, raw_octets : bytes):
 
-            """
+        """
 
-            Este método se encarga de extraer la direcciones MAC destino y de origen, el valor del tercer campo y los octetos que conforman
-            el payload que son transportados dentro de la trama MAC de Ethernet capturada, cuyos octetos en bruto son utilizados para instanciar
-            un objeto de esta clase.
+        Este método se encarga de extraer la direcciones MAC destino y de origen, el valor del tercer campo y los octetos que conforman
+        el payload que son transportados dentro de la trama MAC de Ethernet capturada, cuyos octetos en bruto son utilizados para instanciar
+        un objeto de esta clase.
 
-            """
+        """
 
-            self.direccion_destino = ":".join(f"{b:02x}" for octeto in raw_octets[:6])
+        self.direccion_destino = ":".join(f"{octeto:02x}" for octeto in raw_octets[:6])
 
-            self.direccion_origen = ":".join(f"{b:02x}" for octeto in raw_octets[6:12])
+        self.direccion_origen = ":".join(f"{octeto:02x}" for octeto in raw_octets[6:12])
 
-            self.longitud_tipo = int.from_bytes(raw_octets[12:14], byteorder="big")
+        self.longitud_tipo = int.from_bytes(raw_octets[12:14], byteorder="big")
 
-            self.datos = raw_octets[14:] 
+        self.datos = raw_octets[14:] 
 
