@@ -1,5 +1,7 @@
+from .....pdu import PDU
 
-class DatagramaIPv4:
+
+class DatagramaIPv4(PDU):
 
     """
     Esta clase es utilizada para representar un datagrama de internet en la version 4 de la suite de protocolos TCP/IP.
@@ -30,6 +32,10 @@ class DatagramaIPv4:
     """
 
     def __init__(self, raw_octets_internet_datagram):
+
+        #Inicializacion del PDU.
+
+        super().__init__()
 
         self.version = None
 
