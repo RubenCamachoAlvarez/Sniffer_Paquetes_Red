@@ -24,7 +24,7 @@ class DatagramaIPv4:
         -Direccion de origen -> 32 bits.
         -Direccion destino -> 32 bits.
         -Opciones -> Tamaño de bits variable.
-        -Padding -> Tamaño de bits variable que es utilizado para conseguir una alineacion de 32 bits (16 bytes). Los bits que sirven de padding tienen estado 0.
+        -Padding -> Tamaño de bits variable que es utilizado para conseguir una alineacion de 32 bits (4 bytes). Los bits que sirven de padding tienen estado 0.
         -Datos -> octetos del protocolo de nivel superior transportado dentro del datagrama de internet.
 
     """
@@ -33,7 +33,7 @@ class DatagramaIPv4:
 
         self.version = None
 
-        """Este campo del datagrama indica, en unidades de 32 bits, el tamaño del encabezado del datagrama de internet.
+        """Este campo del datagrama indica, en unidades de 32 bits (4 bytes), el tamaño del encabezado del datagrama de internet.
         El minimo valor que puede tomar este campo es 5 representando que el minimo tamaño del encabezado de un datagrama de internet es de 5x32 = 160 bits (20 bytes).
         El maximo valor que puede tomar este campo es de 15 representando de esta manera que el tamaño máximo del encabezado de un datagrama es de 15x32 = 480 bits
         (60 bytes)."""
