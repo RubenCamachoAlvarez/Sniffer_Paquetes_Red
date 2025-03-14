@@ -44,8 +44,5 @@ class TramaMacEthernet:
 
         self.longitud_tipo = None
 
-        self.payload = None
+        self.datos = None
 
-        self.relleno = None
-
-        self.secuencia_verificacion_trama = None
