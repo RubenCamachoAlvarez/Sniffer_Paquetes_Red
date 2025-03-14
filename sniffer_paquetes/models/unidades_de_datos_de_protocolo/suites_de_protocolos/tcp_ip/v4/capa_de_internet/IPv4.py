@@ -113,7 +113,8 @@ class DatagramaIPv4(PDU):
 
     def imprimir_informacion(self):
 
-        """Método abstracto que debe de implementar cada PDU para mostrar su información asociada correctamente."""
+        """Este método se encarga de realizar el procesamiento de los octetos en bruto que representan al datagrama del internet con el objetivo de
+        extraer el encabezado del datagrama así como el payload que transporta."""
 
         print(f"Version: {self.version}")
 
