@@ -14,8 +14,8 @@ class InterfazRed:
 
     """
 
-    def __init__(self, mtu):
+    def __init__(self, nombre, mtu):
 
-        self.nombre = ""
+        self.nombre = nombre
 
         self.mtu = mtu
