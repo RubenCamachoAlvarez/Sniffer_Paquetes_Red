@@ -4,9 +4,9 @@
 
 ## 🚧🔨**Proyecto en desarrollo**⚙️🛠️ 
 
-Este proyecto se encuentra en proceso de desarrollo constante, por lo cual es seguro que hayan actualizaciones constantes en cortos períodos de tiempo.
+Este proyecto se encuentra en proceso de desarrollo constante, por lo cual es seguro que se realicen varias actualizaciones constantes en cortos períodos de tiempo.
 
-**Una vez que este proyecto tenga una versión 100% estable este apartado será removido.**
+**Una vez que este proyecto tenga una versión 100% estable para su uso este apartado será removido.**
 
 ## 🚀 **Características**
 - ✅ Captura del tráfico de red a nivel de **capa de enlace de datos** y de **capa de red**.
