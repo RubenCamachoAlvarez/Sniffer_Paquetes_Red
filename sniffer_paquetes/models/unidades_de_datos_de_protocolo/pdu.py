@@ -21,6 +21,20 @@ class PDU:
 
         pass
 
+    
+    def procesar_pdu(raw_octets : bytes):
+
+        """Este método abstracto tiene la finalidad de ser implementado por las subclases de PDU para definir
+        la manera en la que procesan los octetos crudos que representan dicha unidad de datos de protocolos
+        a cualquier nivel.
+        
+        La intención es que las subclases PDU implementen obligatoriamente este método para poder extraer
+        los campos del encabezado del respectivo PDU así como el payload que transportan.
+        
+        Este proceso lo harán manipulando los raw_octets recibidos como argumento."""
+
+        pass
+
 
     def imprimir_informacion(self):
 
