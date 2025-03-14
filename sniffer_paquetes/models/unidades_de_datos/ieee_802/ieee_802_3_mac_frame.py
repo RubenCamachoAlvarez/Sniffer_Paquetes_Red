@@ -23,18 +23,15 @@ class TramaMacEthernet:
 
             La especificación original de Ethernet II (lanzada en conjunto por Digital, Intel y Xerox) define que el tercer campo de la trama es
             tipo y básicamente es utilizado para indicar un valor como EtherType que sirve para indicar el contenido del payload (los datos
-            de protocolo de nivel superior) transportado por la trama.
+            de protocolo de nivel superior) transportado en el cuarto campo de la trama.
 
-            En contraste, el estandar de la IEEE 803.2 oficialmente define que el tercer campo de la trama MAC es length (longitud) y de acuerdo
-            al estandar este debe de ser utilizado para definir el numero de bytes útiles que conforman el payload "transportado" en el siguiente
+            En contraste, el estandar de la IEEE 803.2 oficialmente define que el tercer campo de la trama MAC debe de ser utilizado para indicar
+            el numero de bytes transportados en el cuarto campo de la trama.
             campo.
 
-            - payload = Campo donde se transportan los bytes útiles que corresponde a los datos de los protocolos de red superiores, es decir los datos de los protocolos de red que residen desde la capa de red hasta la capa de aplicación del modelo OSI.
-
-            - relleno = Campo utilizado en caso de necesitar bytes de relleno para obtener la longitud minima del payload de la trama.
-
-            - secuencia de verificacion de la trama = Es un campo que transporta un valor que permite verificar que los datos de la trama no sean
-            erroneas al ser recibida por el receptor.
+            - payload = Campo donde se transportan los bytes que correspondea los datos de los protocolos de nivel superior, es decir, los datos
+            de los protocolos de red de nivel superior que residen a partir de la capa de red hasta la capa de aplicación, tomando como base el
+            modelo OSI.
 
         """
 
