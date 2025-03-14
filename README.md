@@ -1,6 +1,12 @@
-# 📌 **Sniffer de paquetes de red**
+# 📡🕵️**Sniffer de paquetes de red**🕵️📡
 
 **Este proyecto es un sniffer de paquetes de red experimental desarrollado para sistemas GNU/Linux con el cual se puede realizar la captura del tráfico red haciendo uso de alguna de las interfaces de red del sistema.**
+
+## 🚧🔨**Proyecto en desarrollo**⚙️🛠️ 
+
+Este proyecto se encuentra en proceso de desarrollo constante, por lo cual es seguro que hayan actualizaciones constantes en cortos períodos de tiempo.
+
+**Una vez que este proyecto tenga una versión 100% estable este apartado será removido.**
 
 ## 🚀 **Características**
 - ✅ Captura del tráfico de red a nivel de **capa de enlace de datos** y de **capa de red**.
