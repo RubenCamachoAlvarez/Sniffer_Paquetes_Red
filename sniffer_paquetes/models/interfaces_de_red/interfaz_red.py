@@ -1,3 +1,4 @@
+import socket
 
 class InterfazRed:
 
@@ -16,6 +17,42 @@ class InterfazRed:
 
     def __init__(self, nombre, mtu):
 
+        """
+
+        Constructor de la clase abstracta que es utilizado como constructor base para poder instanciar cualquier tipo de interfaz de red genérica.
+
+        """
+
         self.nombre = nombre
 
         self.mtu = mtu
+
+
+    def configurar_interfaz(self):
+
+        """
+        
+        Este método es puramente abstracto y nunca debe de llamarse si se esta tratando un objeto de una subclase como si fuera un objeto de la superclase, puesto que
+        en cada subclase puede definir parametros en especifico y/o opciones que permitan configurar la interfaz de red respectiva.
+
+        """
+
+        pass
+
+    
+    def capturar(self, numero_capturas = 1):
+
+        if numero_capturas < 1:
+
+            raise ValueError("Por lo menos se debe de realizar una captura al invocar este método.")
+
+        """
+        
+        Este método tiene como propósito el ser implementado por cada clase que represente a una interfaz
+        de red en especifico para definir el comportamiento necesario para capturar un paquete de red.
+
+        Este método debe de retornar los octetos en brutos de la captura.
+        
+        """
+
+        pass
