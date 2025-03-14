@@ -75,6 +75,7 @@ Debido a ello, estando en la raíz del proyecto, la aplicación debe de ser ejec
 │── 📝 LICENSE             # Licencia GPL v3
 │── 📜 README.md           # Documentación principal
 │── 📄 requirements.txt    # Dependencias necesarias
+│── 🛠️ setup.sh            # Script de configuración inicial del proyecto.
 ```
 
 
