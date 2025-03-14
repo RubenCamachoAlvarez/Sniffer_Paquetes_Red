@@ -59,11 +59,11 @@ class TramaMacEthernet(PDU):
 
         self.es_trama_ieee_802_3 = None
 
-        self._procesar_octetos_trama_mac(raw_octets_trama_mac)
+        self.procesar_pdu(raw_octets_trama_mac)
 
 
 
-    def _procesar_octetos_trama_mac(self, raw_octets : bytes):
+    def procesar_pdu(self, raw_octets : bytes):
 
         """
 
