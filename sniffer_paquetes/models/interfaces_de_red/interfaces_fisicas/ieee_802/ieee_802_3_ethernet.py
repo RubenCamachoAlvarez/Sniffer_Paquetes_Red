@@ -12,7 +12,7 @@ from .....constants.net import IFNAMSIZ, ETH_P_ALL
 
 from .....constants.ioctl import SIOCGIFFLAGS, SIOCSIFFLAGS, IFF_PROMISC
 
-from .....models.unidades_de_datos.ieee_802.ieee_802_3_mac_frame import TramaMacEthernet
+from .....models.unidades_de_datos_de_protocolo.unidades_de_datos.ieee_802.ieee_802_3_mac_frame import TramaMacEthernet
 
 class InterfazEthernet (InterfazRed):
 
