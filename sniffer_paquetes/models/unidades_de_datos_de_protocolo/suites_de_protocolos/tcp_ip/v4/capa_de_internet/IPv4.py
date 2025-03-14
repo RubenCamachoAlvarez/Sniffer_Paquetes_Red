@@ -72,6 +72,8 @@ class DatagramaIPv4(PDU):
 
         self.datos = None
 
+        self.procesar_pdu(raw_octets_internet_datagram)
+
 
     def procesar_pdu(self, raw_octets : bytes):
 
@@ -98,13 +100,13 @@ class DatagramaIPv4(PDU):
 
         self.ttl = raw_octets[8] & 0xFF
 
-        self.protocolo = raw[9] & 0xFF
+        self.protocolo = raw_octets[9] & 0xFF
 
         self.checksum_encabezado = int.from_bytes(raw_octets[10:12], byteorder="big")
 
         self.direccion_origen = ".".join(f"{octeto:d}" for octeto in raw_octets[12:16])
 
-        self.direccion_destino = ".".join(f"{octeto:d}" for octeto in raw_sockets[16:20])
+        self.direccion_destino = ".".join(f"{octeto:d}" for octeto in raw_octets[16:20])
 
         self.opciones = raw_octets[20:self.longitud_encabezado_internet*4]
 
