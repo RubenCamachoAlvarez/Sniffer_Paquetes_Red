@@ -15,30 +15,32 @@ def seleccionar_interfaz_red():
 
     interfaces = listar_interfaces_red()
 
-    while(True):
+    if len(interfaces) > 0:
 
-        try:
+        while(True):
 
-            print("---------------------------------------------------------------")
+            try:
 
-            print("\nMENÚ DE INTERFACES DE RED\n")
+                print("---------------------------------------------------------------")
 
-            for indice_interfaz in range(len(interfaces)):
+                print("\nMENÚ DE INTERFACES DE RED\n")
 
-                print(f"{indice_interfaz} -> {interfaces[indice_interfaz].nombre}")
+                for indice_interfaz in range(len(interfaces)):
 
-            indice_seleccion = int(input("\nDigita el entero de la interfaz que deseas utilizar: "))
+                    print(f"{indice_interfaz} -> {interfaces[indice_interfaz].nombre}")
 
-            if 0 <= indice_seleccion < len(interfaces):
+                indice_seleccion = int(input("\nDigita el entero de la interfaz que deseas utilizar: "))
 
-                break
+                if 0 <= indice_seleccion < len(interfaces):
 
-            print("\nIngresa un entero que corresponda a una interfaz mostrada en el menú.\n", file=sys.stderr)
+                    break
 
-        except ValueError:
+                print("\nIngresa un entero que corresponda a una interfaz mostrada en el menú.\n", file=sys.stderr)
 
-            print("\nError, ingrese un número entero.\n", file=sys.stderr)
+            except ValueError:
 
-    return interfaces[indice_seleccion]
+                print("\nError, ingrese un número entero.\n", file=sys.stderr)
+
+    return interfaces[indice_seleccion] if len(interfaces) > 0 else None
 
         
