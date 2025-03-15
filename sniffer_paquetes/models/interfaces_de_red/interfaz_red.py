@@ -1,5 +1,9 @@
 import socket
 
+from ..unidades_de_datos_de_protocolo.pdu import PDU
+
+from typing import Callable
+
 class InterfazRed:
 
     """
@@ -57,7 +61,7 @@ class InterfazRed:
 
         pass
 
-    def capturar_pdu(self, numero_capturas=1, accion = None):
+    def capturar_pdu(self, numero_capturas : int = 1, accion : Callable[[PDU], None] = None):
 
         """Este método abstracto tiene la finalidad de capturar el tráfico de red realizando ademas, su procesamiento
         y entregando como resultado un objeto o una lista de objetos que representen dicha PDU captura y que almacen
