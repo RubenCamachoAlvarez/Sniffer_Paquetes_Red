@@ -71,7 +71,7 @@ class InterfazEthernet (InterfazRed):
         return lista_capturas[0] if numero_capturas == 1 else lista_capturas
 
     
-    def capturar_trama(self, numero_capturas=1, accion : Callable[[TramaMacEthernet], None] = None):
+    def capturar_pdu(self, numero_capturas : int = 1, accion : Callable[[TramaMacEthernet], None] = None):
 
         lista_capturas = []
 
