@@ -13,7 +13,7 @@ Este proyecto se encuentra en proceso de desarrollo constante, por lo cual es se
 
 ## ⚠️ **Advertencia**
 
-- 🚨 **ES COMPLETAMENTE NECESARIO que el sistema Linux que ejecute este programa tenga montado el sistema de archivos virtual 'sysfs'**
+- 🚨 **ES COMPLETAMENTE NECESARIO que el sistema Linux que ejecute este programa tenga montado el sistema de archivos virtual 'sysfs' en /sys/**
 
 - 🚨 **Este programa ha sido desarrollado únicamente para distribuciones GNU/Linux debido a que hace uso de BSD sockets API y que interactúa con llamadas al sistema específicas para sistemas que utilizan el kernel de Linux.**
 
