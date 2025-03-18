@@ -19,6 +19,10 @@ class PDU:
         """Constructor que permite la constructor correcta de la superclase cuando una clase que representa a un tipo especial
         de PDU es instanciado."""
 
+        #Este atributo de instancia es utilizado para representar el payload transportado por el PDU.
+
+        self.datos = None
+
         pass
 
     
