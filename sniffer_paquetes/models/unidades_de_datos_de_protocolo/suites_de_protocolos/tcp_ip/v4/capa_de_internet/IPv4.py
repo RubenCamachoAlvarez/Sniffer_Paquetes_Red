@@ -70,8 +70,6 @@ class DatagramaIPv4(PDU):
 
         #self.padding = None Este campo del encabezado no tiene mucho sentido almacenarlo.
 
-        self.datos = None
-
         self.procesar_pdu(raw_octets_internet_datagram)
 
 

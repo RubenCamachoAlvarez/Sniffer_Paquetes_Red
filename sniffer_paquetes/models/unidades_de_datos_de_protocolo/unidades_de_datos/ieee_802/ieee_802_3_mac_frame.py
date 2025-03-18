@@ -55,8 +55,6 @@ class TramaMacEthernet(PDU):
 
         self.longitud_tipo = None
 
-        self.datos = None
-
         self.es_trama_ieee_802_3 = None
 
         self.procesar_pdu(raw_octets_trama_mac)
