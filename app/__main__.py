@@ -1,4 +1,4 @@
-from .io_manager.io_cli import seleccionar_interfaz_red
+from .io_manager.io_cli import seleccionar_interfaz_red, modo_no_canonico
 
 from sniffer_paquetes.models.unidades_de_datos_de_protocolo.pdu import PDU
 
@@ -8,7 +8,7 @@ def callback(pdu : PDU):
 
     pdu.imprimir_informacion()
 
-    print("--------------------------------------")
+    print("----------------------------------------------")
 
 if __name__ == "__main__":
 
