@@ -85,11 +85,10 @@ def seleccionar_interfaz_red():
 
         sys.stdout.flush()
 
+        pintar_menu_seleccion_interfaz(interfaces_soportadas, indice_interfaz_seleccionada)
+        modo_no_canonico(True)
+
         while True:
-
-            pintar_menu_seleccion_interfaz(interfaces_soportadas, indice_interfaz_seleccionada)
-
-            modo_no_canonico(True)
 
             caracter = sys.stdin.read(1)
 
@@ -138,6 +137,8 @@ def seleccionar_interfaz_red():
                                 sys.stdout.write("\x1b[K")
 
                                 sys.stdout.flush()
+
+                            pintar_menu_seleccion_interfaz(interfaces_soportadas, indice_interfaz_seleccionada)
 
                 except:
 
