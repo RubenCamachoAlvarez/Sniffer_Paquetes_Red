@@ -29,16 +29,22 @@ def run_app():
 
     time.sleep(1)
 
-    interfaz_escaneo = seleccionar_interfaz_red()
+    try:
 
-    if interfaz_escaneo != None:
+        interfaz_escaneo = seleccionar_interfaz_red()
 
-        print("Iniciando captura de PDUs...\n")
+        if interfaz_escaneo != None:
 
-        time.sleep(1)
+            print("Iniciando captura de PDUs...\n")
 
-        interfaz_escaneo.capturar_pdu(numero_capturas=20, accion=imprimir_informacion_detallada_PDU)
+            time.sleep(1)
 
-    else:
+            interfaz_escaneo.capturar_pdu(numero_capturas=20, accion=imprimir_informacion_detallada_PDU)
 
-        print(f"No se han detectado interfaces compatibles que tengan soporte en el proyecto actualmente para poder capturar paquetes de red", file=sys.stderr)
+        else:
+
+            print(f"No se han detectado interfaces compatibles que tengan soporte en el proyecto actualmente para poder capturar paquetes de red", file=sys.stderr)
+
+    except KeyboardInterrupt:
+
+        sys.exit(0)
