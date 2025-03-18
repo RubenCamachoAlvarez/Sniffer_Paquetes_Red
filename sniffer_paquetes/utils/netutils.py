@@ -5,6 +5,8 @@ import os
 
 from sniffer_paquetes.models.interfaces_de_red.interfaces_fisicas.ieee_802.ieee_802_3_ethernet import InterfazEthernet
 
+from sniffer_paquetes.models.interfaces_de_red.interfaces_virtuales.loopback import InterfazLoopback
+
 from sniffer_paquetes.constants import arp
 
 def listar_interfaces_red():
@@ -72,6 +74,14 @@ def listar_interfaces_red():
             #Creamos un objeto que representa esta interfaz.
 
             interfaz = InterfazEthernet(nombre_interfaz, mtu_interfaz)
+
+        #Si la interfaz de red listada corresponde a la interfaz de Loopback.
+
+        elif tipo_hardware_interfaz == arp.ARPHRD_LOOPBACK:
+
+            #Creamos un objeto que representa la interfaz virtual de loopback del sistema
+
+            interfaz = InterfazLoopback(nombre_interfaz, mtu_interfaz)
 
         #Si se encontró que la interfaz de red listada corresponde a un tipo de interfaz con soporte en el paquete sniffer_paquetes.
 
