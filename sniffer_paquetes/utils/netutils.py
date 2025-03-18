@@ -61,8 +61,6 @@ def listar_interfaces_red():
 
                 clave_valor = linea.strip().split("=")
 
-                print(clave_valor)
-
                 if clave_valor[0] == "DEVTYPE" and clave_valor[1] == "wlan":
 
                     es_interfaz_inalambrica = True
