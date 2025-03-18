@@ -8,6 +8,22 @@ import sys
 
 import termios
 
+def mostrar_banner_inicio():
+
+    banner = """
+    ███████╗███╗   ██╗██╗███████╗███████╗███████╗██████╗ 
+    ██╔════╝████╗  ██║██║██╔════╝██╔════╝██╔════╝██╔══██╗
+    ███████╗██╔██╗ ██║██║█████╗  █████╗  █████╗  ██████╔╝
+    ╚════██║██║╚██╗██║██║██╔══╝  ██╔══╝  ██╔══╝  ██╔══██╗
+    ███████║██║ ╚████║██║██║     ██║     ███████╗██║  ██║
+    ╚══════╝╚═╝  ╚═══╝╚═╝╚═╝     ╚═╝     ╚══════╝╚═╝  ╚═╝
+    ═════════════════════════════════════════════════════
+            Sniffer de tráfico de red - Capa 2
+    ═════════════════════════════════════════════════════
+    """
+    
+    print(banner)
+
 def modo_no_canonico(habilitar=False):
 
     """Esta función tiene la intención de poner la salida estándar utilizada por la aplicación
@@ -50,7 +66,7 @@ def seleccionar_interfaz_red():
 
             try:
 
-                print("---------------------------------------------------------------")
+                print("═════════════════════════════════════════════════════")
 
                 print("\nMENÚ DE INTERFACES DE RED SOPORTADAS\n")
 
