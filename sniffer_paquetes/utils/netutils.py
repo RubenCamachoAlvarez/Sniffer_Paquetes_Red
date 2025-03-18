@@ -67,7 +67,7 @@ def listar_interfaces_red():
 
         #Si la interfaz de red listada corresponde a una interfaz de Ethernet.
 
-        if not es_interfaz_inalambrica and tipo_hardware_interfaz == arp.ARPHRD_ETHER or tipo_hardware_interfaz == arp.ARPHRD_IEEE802:
+        if es_interfaz_inalambrica or (tipo_hardware_interfaz == arp.ARPHRD_ETHER or tipo_hardware_interfaz == arp.ARPHRD_IEEE802):
 
             #Creamos un objeto que representa esta interfaz.
 
