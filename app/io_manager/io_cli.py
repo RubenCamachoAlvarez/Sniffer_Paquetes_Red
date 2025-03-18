@@ -8,6 +8,24 @@ import sys
 
 import termios
 
+def modo_no_canonico(habilitar=False):
+
+    """Esta función tiene la intención de poner la salida estándar utilizada por la aplicación
+    en modo no canónico con el objetivo de poder capturar inmediatamente las teclas presionadas
+    por el usuario al solicitar ingresar una entrada."""
+
+    configuracion = termios.tcgetattr(sys.stdin.fileno())[:]
+
+    if habilitar == True:
+
+        configuracion[3] &= ~termios.ICANON
+
+    else:
+
+        configuracion[3] |= termios.ICANON
+
+    termios.tcsetattr(sys.stdin.fileno(), termios.TCSANOW, configuracion)
+
 def seleccionar_interfaz_red():
 
     """Como su nombre lo indica, está función está encargada de mostrar las diferentes interfaces de red con las que
@@ -61,18 +79,3 @@ def seleccionar_interfaz_red():
                 print("\nError, ingrese un número entero.", file=sys.stderr)
 
     return interfaces_soportadas[indice_seleccion] if len(interfaces_soportadas) > 0 else None
-
-
-def modo_no_canonico(habilitar=False):
-
-    configuracion = termios.tcgetattr(sys.stdin.fileno())[:]
-
-    if habilitar == True:
-
-        configuracion[3] &= ~termios.ICANON
-
-    else:
-
-        configuracion[3] |= termios.ICANON
-
-    termios.tcsetattr(sys.stdin.fileno(), termios.TCSANOW, configuracion)
