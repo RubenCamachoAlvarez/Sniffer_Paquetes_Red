@@ -22,8 +22,6 @@ if __name__ == "__main__":
 
     if interfaz_escaneo != None:
 
-        print(f"\nInterfaz escogida: {interfaz_escaneo.nombre}\n")
-
         time.sleep(1)
 
         interfaz_escaneo.capturar_pdu(numero_capturas=10, accion=callback )
