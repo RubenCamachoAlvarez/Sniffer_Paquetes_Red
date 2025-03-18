@@ -72,7 +72,7 @@ def seleccionar_interfaz_red():
 
             print(f"✗ - {nombre_interfaz}")
 
-        print("\n═════════════════════════════════════════════════════")
+        print("\n───────────────────────────────────────────────────")
 
 
     if numero_interfaces_red_soportadas > 0:
