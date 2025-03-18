@@ -58,6 +58,8 @@ def pintar_menu_seleccion_interfaz(lista_interfaces : List[InterfazRed], element
 
 def seleccionar_interfaz_red():
 
+    print("\nListando interfaces de red del sistema...\n")
+
     interfaces_soportadas, interfaces_no_soportadas = listar_interfaces_red()
 
     numero_interfaces_red_soportadas = len(interfaces_soportadas)
@@ -77,7 +79,7 @@ def seleccionar_interfaz_red():
 
         print("\nINTERFACES DE RED SOPORTADAS\n")
 
-        indice_interfaz_seleccionadas = 0
+        indice_interfaz_seleccionada = 0
 
         sys.stdout.write("\x1b[?25l")
 
@@ -85,7 +87,7 @@ def seleccionar_interfaz_red():
 
         while True:
 
-            pintar_menu_seleccion_interfaz(interfaces_soportadas, indice_interfaz_seleccionadas)
+            pintar_menu_seleccion_interfaz(interfaces_soportadas, indice_interfaz_seleccionada)
 
             modo_no_canonico(True)
 
@@ -115,13 +117,13 @@ def seleccionar_interfaz_red():
 
                             if caracter == "A":
 
-                                indice_interfaz_seleccionadas -= 1
+                                indice_interfaz_seleccionada -= 1
 
                             else:
 
-                                indice_interfaz_seleccionadas += 1
+                                indice_interfaz_seleccionada += 1
 
-                            indice_interfaz_seleccionadas %= numero_interfaces_red_soportadas
+                            indice_interfaz_seleccionada %= numero_interfaces_red_soportadas
 
                             for fila in range(numero_interfaces_red_soportadas):
 
@@ -140,5 +142,15 @@ def seleccionar_interfaz_red():
                 except:
 
                     pass
+
+        if numero_interfaces_red_soportadas > 0:
+
+            interfaz_seleccionada : InterfazRed = interfaces_soportadas[indice_interfaz_seleccionada]
+
+            print(f"\nInterfaz seleccionada '{interfaz_seleccionada.nombre}'\n")
+
+            return interfaz_seleccionada
                     
-        return interfaces_soportadas[indice_interfaz_seleccionadas] if numero_interfaces_red_soportadas > 0 else None
+        else:
+
+            return None
