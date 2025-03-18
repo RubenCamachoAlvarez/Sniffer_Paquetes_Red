@@ -4,9 +4,13 @@ por medio de la línea de comandos."""
 
 from sniffer_paquetes.utils.netutils import listar_interfaces_red
 
+from sniffer_paquetes.models.interfaces_de_red.interfaz_red import InterfazRed
+
 import sys
 
 import termios
+
+from typing import List
 
 def mostrar_banner_inicio():
 
@@ -34,64 +38,107 @@ def modo_no_canonico(habilitar=False):
 
     if habilitar == True:
 
-        configuracion[3] &= ~termios.ICANON
+        configuracion[3] &= ~(termios.ICANON | termios.ECHO)
 
     else:
 
-        configuracion[3] |= termios.ICANON
+        configuracion[3] |= (termios.ICANON | termios.ECHO)
 
     termios.tcsetattr(sys.stdin.fileno(), termios.TCSANOW, configuracion)
 
-def seleccionar_interfaz_red():
 
-    """Como su nombre lo indica, está función está encargada de mostrar las diferentes interfaces de red con las que
-    cuenta el dispositivo que se ejecuta sobre un kernel de Linux, con el objetivo de que el usuario de la aplicación
-    escoja con cual de estas interfaces es con la que desea realizar el escaneo de los paquetes de red que transitan
-    por la red a la que se encuentra conectado su sistema por medio de la interfaz de red seleccionada."""
+def pintar_menu_seleccion_interfaz(lista_interfaces : List[InterfazRed], elemento_seleccionado : int = 0):
+
+    numero_elementos = len(lista_interfaces)
+
+    for indice, interfaz in enumerate(lista_interfaces):
+
+        print(f" {"▶" if indice == (elemento_seleccionado % numero_elementos) else ""} {interfaz.nombre}")
+
+
+def seleccionar_interfaz_red():
 
     interfaces_soportadas, interfaces_no_soportadas = listar_interfaces_red()
 
+    numero_interfaces_red_soportadas = len(interfaces_soportadas)
+
     if len(interfaces_no_soportadas) > 0:
 
-        print("\nINTERFACES DE RED NO SOPORTADAS\n", file=sys.stderr)
+        print("\nINTERFACES DE RED NO SOPORTADAS\n")
 
         for nombre_interfaz in interfaces_no_soportadas:
 
-            print(f"-{nombre_interfaz}\n", file=sys.stderr)
+            print(f"✗ - {nombre_interfaz}")
+
+        print("\n═════════════════════════════════════════════════════")
 
 
-    if len(interfaces_soportadas) > 0:
+    if numero_interfaces_red_soportadas > 0:
 
-        while(True):
+        print("\nINTERFACES DE RED SOPORTADAS\n")
 
-            try:
+        indice_interfaz_seleccionadas = 0
 
-                print("═════════════════════════════════════════════════════")
+        sys.stdout.write("\x1b[?25l")
 
-                print("\nMENÚ DE INTERFACES DE RED SOPORTADAS\n")
+        sys.stdout.flush()
 
-                for indice_interfaz in range(len(interfaces_soportadas)):
+        while True:
 
-                    print(f"{indice_interfaz} -> {interfaces_soportadas[indice_interfaz].nombre}")
+            pintar_menu_seleccion_interfaz(interfaces_soportadas, indice_interfaz_seleccionadas)
 
-                print("\nSelecciona la interfaz quie deseas utilizar: ", end="", flush=True)
+            modo_no_canonico(True)
 
-                modo_no_canonico(habilitar=True)
+            caracter = sys.stdin.read(1)
 
-                indice_seleccion = int(sys.stdin.read(1))
+            if caracter == '\n':
 
-                modo_no_canonico(habilitar=False)
+                modo_no_canonico(False)
 
-                if 0 <= indice_seleccion < len(interfaces_soportadas):
+                sys.stdout.write("\x1b[?25h")
 
-                    print("")
+                sys.stdout.flush()
 
-                    break
+                break
 
-                print("\nIngresa un entero que corresponda a una interfaz mostrada en el menú.", file=sys.stderr)
+            elif caracter == "\x1b":
+                
+                try:
 
-            except ValueError:
+                    caracter = sys.stdin.read(1)
 
-                print("\nError, ingrese un número entero.", file=sys.stderr)
+                    if caracter == "[":
 
-    return interfaces_soportadas[indice_seleccion] if len(interfaces_soportadas) > 0 else None
+                        caracter = sys.stdin.read(1)
+
+                        if caracter in ["A", "B"]:
+
+                            if caracter == "A":
+
+                                indice_interfaz_seleccionadas -= 1
+
+                            else:
+
+                                indice_interfaz_seleccionadas += 1
+
+                            indice_interfaz_seleccionadas %= numero_interfaces_red_soportadas
+
+                            for fila in range(numero_interfaces_red_soportadas):
+
+                                sys.stdout.write("\x1b[1A")
+
+                                sys.stdout.flush()
+
+                                sys.stdout.write("\r")
+
+                                sys.stdout.flush()
+
+                                sys.stdout.write("\x1b[K")
+
+                                sys.stdout.flush()
+
+                except:
+
+                    pass
+                    
+        return interfaces_soportadas[indice_interfaz_seleccionadas] if numero_interfaces_red_soportadas > 0 else None
