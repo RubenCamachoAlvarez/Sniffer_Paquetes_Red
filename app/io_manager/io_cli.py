@@ -6,6 +6,8 @@ from sniffer_paquetes.utils.netutils import listar_interfaces_red
 
 import sys
 
+import termios
+
 def seleccionar_interfaz_red():
 
     """Como su nombre lo indica, está función está encargada de mostrar las diferentes interfaces de red con las que
@@ -21,7 +23,7 @@ def seleccionar_interfaz_red():
 
         for nombre_interfaz in interfaces_no_soportadas:
 
-            print(f"-> {nombre_interfaz}", file=sys.stderr)
+            print(f"-{nombre_interfaz}\n", file=sys.stderr)
 
 
     if len(interfaces_soportadas) > 0:
@@ -30,7 +32,7 @@ def seleccionar_interfaz_red():
 
             try:
 
-                print("\n---------------------------------------------------------------")
+                print("---------------------------------------------------------------")
 
                 print("\nMENÚ DE INTERFACES DE RED SOPORTADAS\n")
 
@@ -38,9 +40,17 @@ def seleccionar_interfaz_red():
 
                     print(f"{indice_interfaz} -> {interfaces_soportadas[indice_interfaz].nombre}")
 
-                indice_seleccion = int(input("\nDigita el entero de la interfaz que deseas utilizar: "))
+                print("\nSelecciona la interfaz quie deseas utilizar: ", end="", flush=True)
+
+                modo_no_canonico(habilitar=True)
+
+                indice_seleccion = int(sys.stdin.read(1))
+
+                modo_no_canonico(habilitar=False)
 
                 if 0 <= indice_seleccion < len(interfaces_soportadas):
+
+                    print("")
 
                     break
 
@@ -52,4 +62,17 @@ def seleccionar_interfaz_red():
 
     return interfaces_soportadas[indice_seleccion] if len(interfaces_soportadas) > 0 else None
 
-        
+
+def modo_no_canonico(habilitar=False):
+
+    configuracion = termios.tcgetattr(sys.stdin.fileno())[:]
+
+    if habilitar == True:
+
+        configuracion[3] &= ~termios.ICANON
+
+    else:
+
+        configuracion[3] |= termios.ICANON
+
+    termios.tcsetattr(sys.stdin.fileno(), termios.TCSANOW, configuracion)
