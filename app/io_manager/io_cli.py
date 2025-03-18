@@ -149,6 +149,8 @@ def seleccionar_interfaz_red():
 
             print(f"\nInterfaz seleccionada '{interfaz_seleccionada.nombre}'\n")
 
+            print("┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅\n")
+
             return interfaz_seleccionada
                     
         else:
