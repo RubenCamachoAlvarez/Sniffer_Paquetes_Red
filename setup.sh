@@ -1,89 +1,87 @@
-#!/bin/bash
+#!/bin/sh
+#	Author: Ruben Camacho Alvarez
+#	DGTIC,UNAM@SEGURIDAD INFORMATICA
 #
-#	Autor: Ruben Camacho Alvarez
+#	Description:
 #
-#	DGTIC-UNAM@SEGURIDAD_INFORMATICA
+#	This shell script creates and configures the virtual environment to 
+#	run the network packet sniffer securely.
 #
-#	Descripcion:
+#	Usage:
 #
-#		Este script de shell para sistemas UNIX tiene la finalidad de llevar a cabo la
-#		creacion y configuracion de un entorno virtual para ejecutar el sniffer de red de
-#		manera segura.
+#	sh setup.sh
 #
-#	Modo de ejecucion:
+#	or, if the file is executable:
 #
-#		bash setup.sh
+#	./setup.sh
 #
 
-INVOCACION=${BASH_SOURCE[0]}
+on_error() {
 
-RUTA_DIRECTORIO_PADRE_RAIZ="$(dirname -- $INVOCACION)"
+	if [ $? -ne 0 ]; then
 
-if [ $RUTA_DIRECTORIO_PADRE_RAIZ == "." ]; then
+		echo "$1"
 
-	RUTA_DIRECTORIO_PADRE_RAIZ="$(dirname -- "$(pwd)")"
+		exit 1
 
-	NOMBRE_DIRECTORIO_RAIZ="$(basename -- "$(pwd)")"
+	fi
 
-else
+}
 
-	NOMBRE_DIRECTORIO_RAIZ="$(basename -- $RUTA_DIRECTORIO_PADRE_RAIZ)"
 
-	RUTA_DIRECTORIO_PADRE_RAIZ="$(dirname -- $RUTA_DIRECTORIO_PADRE_RAIZ)"
+echo "Starting sniffer setup"
+
+if cat /etc/os-release | grep -Eiq "(Ubuntu)|(Debian)"; then
+
+	dpkg -l python3-venv 2> /dev/null | grep -Eq '^ii'
+
+	if [ $? -ne 0 ]; then
+
+		echo "Package 'python3-venv' is not installed"
+
+		echo -n "Would you like to install it? [y/N]: "
+
+		read confirmation
+
+		if echo $confirmation | grep -Eiq '^Y'; then
+
+			echo "Installing package..."
+
+			sudo apt install -y python3-venv
+
+			on_error "Error while trying to install the package"
+
+		else
+
+			on_error "The package will not be installed"
+
+		fi
+
+	fi
 
 fi
 
-NOMBRE_ENTORNO_VIRTUAL="env$NOMBRE_DIRECTORIO_RAIZ"
+echo "Creating virtual environment..."
 
+python3 -m venv .
 
-echo -e "\n-----------------------------------------------------"
+on_error "Error creating the virtual environment."
 
-echo -e "\nConfigurando entorno virtual de la aplicacion CLI\n"
+echo "Virtual environment created successfully"
 
-echo "-----------------------------------------------------"
-
-
-echo -e "\n> Cambiando a directorio $RUTA_DIRECTORIO_PADRE_RAIZ \n"
-
-cd -- $RUTA_DIRECTORIO_PADRE_RAIZ
-
-echo -e "> Creando directorio $NOMBRE_ENTORNO_VIRTUAL \n"
-
-mkdir -- $NOMBRE_ENTORNO_VIRTUAL
-
-echo -e "> Moviendo directorio $NOMBRE_DIRECTORIO_RAIZ dentro del directorio $NOMBRE_ENTORNO_VIRTUAL \n"
-
-mv -- $NOMBRE_DIRECTORIO_RAIZ $NOMBRE_ENTORNO_VIRTUAL
-
-echo -e "> Cambiando a directorio $NOMBRE_ENTORNO_VIRTUAL \n"
-
-cd -- $NOMBRE_ENTORNO_VIRTUAL
-
-echo -e "> Creando entorno virtual \n"
-
-python -m venv .
-
-echo -e "> Entorno virtual creando satisfactoriamente \n"
-
-echo "-----------------------------------------------------"
-
-echo -e "\nEntorno virtual listo para ejecutar la aplicacion CLI\n"
-
-echo "-----------------------------------------------------"
-
-echo -e "> Iniciando entorno virtual... \n"
+echo "Activating the virtual environment..."
 
 source ./bin/activate
 
-echo -e "\n> Cambiando a directorio $NOMBRE_DIRECTORIO_RAIZ \n"
+on_error "Failed to activate the virtual environment"
 
-cd -- $NOMBRE_DIRECTORIO_RAIZ
+echo "Virtual environment activated successfully"
 
-echo -e "> Instalando dependencias (requirements.txt) ...\n"
+echo "Installing required dependencies..."
 
 pip install -r requirements.txt
 
-echo -e "> setup.sh ejecutado correctamente\n"
+on_error "Failed to install project dependencies"
 
-echo -e "> Todo preparado para ejecutar la aplicacion CLI\n"
+echo "Sniffer setup complete"
 
