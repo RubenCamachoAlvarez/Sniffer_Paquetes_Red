@@ -71,7 +71,7 @@ echo "Virtual environment created successfully"
 
 echo "Activating the virtual environment..."
 
-source ./bin/activate
+. bin/activate
 
 on_error "Failed to activate the virtual environment"
 
