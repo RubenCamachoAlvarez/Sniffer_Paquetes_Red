@@ -9,11 +9,11 @@
 #
 #	Usage:
 #
-#	sh setup.sh
+#	. setup.sh
 #
-#	or, if the file is executable:
+#	or, if using bash
 #
-#	./setup.sh
+#	source setup.sh
 #
 
 on_error() {
