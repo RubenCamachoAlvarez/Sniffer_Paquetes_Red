@@ -16,19 +16,6 @@
 #	source setup.sh
 #
 
-on_error() {
-
-	if [ $? -ne 0 ]; then
-
-		echo "$1"
-
-		exit 1
-
-	fi
-
-}
-
-
 echo "Starting sniffer setup"
 
 if cat /etc/os-release | grep -Eiq "(Ubuntu)|(Debian)"; then
@@ -47,13 +34,19 @@ if cat /etc/os-release | grep -Eiq "(Ubuntu)|(Debian)"; then
 
 			echo "Installing package..."
 
-			sudo apt install -y python3-venv
+			if ! sudo apt install -y python3-venv; then
 
-			on_error "Error while trying to install the package"
+				echo "Error while trying to install the package" >&2
+
+				return 1
+
+			fi
 
 		else
 
-			on_error "The package will not be installed"
+			echo "The package will not be installed" >&2
+
+			return 1
 
 		fi
 
@@ -63,25 +56,37 @@ fi
 
 echo "Creating virtual environment..."
 
-python3 -m venv .
+if ! python3 -m venv .; then
 
-on_error "Error creating the virtual environment."
+	echo "Error creating the virtual environment." >&2
+
+	return 1
+
+fi
 
 echo "Virtual environment created successfully"
 
 echo "Activating the virtual environment..."
 
-. bin/activate
+if ! . bin/activate; then
 
-on_error "Failed to activate the virtual environment"
+	echo "Failed to activate the virtual environment" >&2
+
+	return 1
+
+fi
 
 echo "Virtual environment activated successfully"
 
 echo "Installing required dependencies..."
 
-pip install -r requirements.txt
+if ! pip install -r requirements.txt; then
 
-on_error "Failed to install project dependencies"
+	echo "Failed to install project dependencies" >&2
+
+	return 1
+
+fi
 
 echo "Sniffer setup complete"
 
