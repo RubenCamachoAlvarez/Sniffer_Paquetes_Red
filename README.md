@@ -62,10 +62,10 @@ ___
 
 El sniffer debe de ser ejecutado con **permisos de root** debido a que usa **raw sockets** y llamadas al sistema **ioctl()** para llevar a cabo la captura del tráfico por medio de los adaptadores e interfaces ofrecidos por el sistema.
 
-De este modo, una vez activado el entorno virtual de la aplicación, ejecuta el sniffer a través del siguiente comando.
+De este modo, una vez activado el entorno virtual de la aplicación y estando posicionado en el directorio raíz del proyecto, ejecuta el sniffer a través del siguiente comando.
 
 ```bash
-🐧user@host:~$ sudo python -m app
+🐧user@host:~$ sudo bin/python -m app
 ```
 
 ## 📂 **Estructura del Proyecto**
