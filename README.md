@@ -57,7 +57,7 @@ Para desactivar el entorno virtual ejecuta el siguiente comando.
 🐧user@host:~$ deactivate
 ```
 
-⚠️ **Este proyecto no utiliza ninguna dependencia externa, por lo cual podría ejecutarse sin ningún problemas fuera de un entorno virutal, sin embargo se recomienda su creación para garantizar una ejecución segura que no afecte la instalación global de Python en tu sistema.**
+⚠️ **Este proyecto no utiliza ninguna dependencia externa, por lo cual podría ejecutarse sin ningún problemas fuera de un entorno virtual, sin embargo se recomienda su creación para garantizar una ejecución segura que no afecte la instalación global de Python en tu sistema.**
 ___
 
 El sniffer debe de ser ejecutado con **permisos de root** debido a que usa **raw sockets** y llamadas al sistema **ioctl()** para llevar a cabo la captura del tráfico por medio de los adaptadores e interfaces ofrecidos por el sistema.
